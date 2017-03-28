@@ -1,0 +1,31 @@
+{
+  "name": "gitlab-webhook-translator",
+  "version": "0.0.1",
+  "description": "Just a tiny web server to translate Gitlab web hooks POST body to the appropriate format.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.2",
+    "npmlog": "^4.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.it.dalim.com:1022/sys/gitlab-webhook-translator.git"
+  },
+  "keywords": [
+    "gitlab",
+    "webhook",
+    "post",
+    "get",
+    "body",
+    "variable",
+    "mr",
+    "ci"
+  ],
+  "author": "Melwin Kieffer",
+  "license": "MIT"
+}
