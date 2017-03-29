@@ -8,7 +8,7 @@ at the appropriate moment.
 ## Configuration
 Configuration file is located at `/translations.json`
 
-Explanation in code:
+Explanation as code:
 ```json
 {"translations": [
   {
@@ -16,19 +16,24 @@ Explanation in code:
     "url": "https://my-service.com/route/with/:gitlab.body.attribute"
   },
   {
-    "token": "Your_Secret_Gitlab_Token", //Optional, used to filter translations
+    "token": "Your_Secret_Gitlab_Token",
     "method": "POST",
     "url": "https://my-service.com/another/route/:gitlab.body.attribute",
     "body": {
-      "new-attribute": "gitlab.body.attribute",
+      "new-attribute": ":gitlab.body.attribute",
       "new-object": {
-        "another-attribute": "gitlab.body.another.attribute"
+        "another-attribute": ":gitlab.body.another.attribute"
       }
     },
-    "condition": "gitlab.body.attribute === 'test'" //Optional, used to filter translations
+    "condition": ":gitlab.body.attribute === 'test'"
   }
 ]}
 ```
+The only required fields are `method` and `url`,
+the others are optional.
+Attributes `token` and `condition` are used to filter translations
+while `body` will be the `application/json` encoded body of the
+outgoing request.
 
 ## Run it
     $ docker run -d --name gitlab-wht-companion \
@@ -49,7 +54,7 @@ on merge request events within the same project:
   {
     "method": "GET",
     "url": "https://git.example.com//api/v4/projects/:object_attributes.source_project_id/ref/:object_attributes.source_branch/trigger/pipeline?token=3d4e9e3139c73a6be30bece40bd3e8",
-    "condition": "object_attributes.work_in_progress === false"
+    "condition": ":object_attributes.work_in_progress === false"
   }
 ]}
 ```
