@@ -12,13 +12,11 @@ Explanation in code:
 ```json
 {"translations": [
   {
-    "token": "Your_Secret_Gitlab_Token",
     "method": "GET",
-    "url": "https://my-service.com/route/with/:gitlab.body.attribute",
-    "condition": "gitlab.body.attribute == 'test'"
+    "url": "https://my-service.com/route/with/:gitlab.body.attribute"
   },
   {
-    "token": "Another_Secret_Gitlab_Token",
+    "token": "Your_Secret_Gitlab_Token", //Optional, used to filter translations
     "method": "POST",
     "url": "https://my-service.com/another/route/:gitlab.body.attribute",
     "body": {
@@ -26,7 +24,8 @@ Explanation in code:
       "new-object": {
         "another-attribute": "gitlab.body.another.attribute"
       }
-    }
+    },
+    "condition": "gitlab.body.attribute === 'test'" //Optional, used to filter translations
   }
 ]}
 ```
@@ -48,10 +47,9 @@ on merge request events within the same project:
 ```json
 {"translations": [
   {
-    "token": "superXsecretXtoken",
     "method": "GET",
     "url": "https://git.example.com//api/v4/projects/:object_attributes.source_project_id/ref/:object_attributes.source_branch/trigger/pipeline?token=3d4e9e3139c73a6be30bece40bd3e8",
-    "condition": "object_attributes.work_in_progress == false"
+    "condition": "object_attributes.work_in_progress === false"
   }
 ]}
 ```
