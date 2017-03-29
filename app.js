@@ -15,17 +15,18 @@ app.get('/', function (req, res) {
 
 app.post('/', function (req, res) {
     // Parse request body
-    log.info('Hook received from '+ req.hostname +'('+ req.ip +')');
+    log.info('Hook received from ('+ req.ip +')');
     // Fetch Gitlab token
     var token = req.get('X-Gitlab-Token');
     // Parse file
     Config.parse(function (config) {
         // Process translation
-        config.forEach(function (translation) {
+        for (i = 0; i < config.translations.length; i++) {
+            var translation = config.translations[i];
             Translation.process(translation, req.body, token, function (status, message) {
                 //todo
             });
-        });
+        }
     });
     res.send('Thank you Gitlab, you did great!');
 });
