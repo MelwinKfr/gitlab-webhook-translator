@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . /app
 
+COPY docker/translations.json /translations.json
+
 EXPOSE 80
 
 ENTRYPOINT ["docker/entrypoint.sh"]
