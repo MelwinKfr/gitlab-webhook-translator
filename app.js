@@ -1,11 +1,33 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 var Config = require('./lib/config');
 var log = require('./lib/log');
+var Translation = require('./lib/translation');
 
 app.get('/', function (req, res) {
     res.send('Gitlab webhook translator is listening on port 80')
+});
+
+app.post('/', function (req, res) {
+    // Parse request body
+    log.info('Hook received from '+ req.hostname +'('+ req.ip +')');
+    // Fetch Gitlab token
+    var token = req.get('X-Gitlab-Token');
+    // Parse file
+    Config.parse(function (config) {
+        // Process translation
+        config.forEach(function (translation) {
+            Translation.process(translation, req.body, token, function (status, message) {
+                //todo
+            });
+        });
+    });
+    res.send('Thank you Gitlab, you did great!');
 });
 
 app.listen(80, function () {
