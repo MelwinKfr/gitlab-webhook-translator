@@ -16,6 +16,7 @@ located at `/translations.json`.
 ```json
 {"translations": [
   { // Comments are authorized
+    "name": "to_identify_the_translation_inside_logs",
     "token": "Your_Secret_Gitlab_Token",
     "target": {
         "method": "POST",
@@ -37,9 +38,10 @@ located at `/translations.json`.
 ]}
 ```
 ### Attributes
+- `name`: Allow you to easily spot your translation inside  logs.
 - `token`: Optional, used to filter translations. It is compared with header `"X-Gitlab-Token"`.
 - `condition`: Optional, used to filter translations. It must be a correct Javascript if statement's condition.
-- `target`: Required object to define the targeted service
+- `target`: Required object to define the targeted service.
     - `method`: A string specifying the HTTP request method. Defaults to `"GET"`.
     - `protocol`: Defaults to `"http"`. You can choose between `http` or `https`.
     - `host`: A domain name or IP address of the server to issue the request to.
