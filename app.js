@@ -13,6 +13,13 @@ app.get('/', function (req, res) {
     res.send('Gitlab webhook translator is listening on port 80')
 });
 
+app.all(/^\/test\/.*/, function (req, res) {
+    log.debug('test url', req.originalUrl);
+    log.debug('test headers', req.headers);
+    log.debug('test body', req.body);
+    res.send();
+});
+
 app.post('/', function (req, res) {
     // Parse request body
     log.info('Hook received from ('+ req.ip +')');
