@@ -29,11 +29,12 @@ Explanation as code:
   }
 ]}
 ```
-The only required fields are `method` and `url`,
-the others are optional.
+The only required fields are `method` and `url`, the others are optional.
 Attributes `token` and `condition` are used to filter translations
-while `body` will be the `application/json` encoded body of the
-outgoing request.
+while `body` will be the `application/json` encoded body of the outgoing request.
+
+In `body` attribute, you can use an object as template variable,
+it will be parsed and translated and correctly forwarded to the targeted service.
 
 ## Run it
     $ docker run -d --name gitlab-wht-companion \
