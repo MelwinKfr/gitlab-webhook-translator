@@ -1,0 +1,3 @@
+FROM wht
+
+RUN npm install -g nodemon
