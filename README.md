@@ -49,6 +49,8 @@ located at `/translations.json`.
     - `path`: Request path. Defaults to `"/"`.
 - `body`: Will be the `application/json` encoded body of the outgoing request.
 
+Required attributes: `target`, `target.host`, `target.path`.
+
 ### Variables
 You can use variables to translate the incoming request into the appropriate outgoing format.
 To do so, just use add `":"` before a valid attribute contained 
