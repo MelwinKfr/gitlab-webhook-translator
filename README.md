@@ -23,7 +23,8 @@ located at `/translations.json`.
         "protocol": "https",
         "host": "my-service.com",
         "port": 443,
-        "path": "/another/route/:gitlab.body.attribute?token='xyz'"
+        "path": "/another/route/:gitlab.body.attribute?token='xyz'",
+        "content_type": "json"
     },
     "body": {
       "new-attribute": ":gitlab.body.attribute",
@@ -47,7 +48,9 @@ located at `/translations.json`.
     - `host`: A domain name or IP address of the server to issue the request to.
     - `port`: Port of targeted server. Defaults to `80` or `443` according to used protocol (`http` or `https`).
     - `path`: Request path. Defaults to `"/"`.
-- `body`: Will be the `application/json` encoded body of the outgoing request.
+    - `content_type`: Defaults to`"json"`, but can be switched to `"xform"`.
+- `body`: Will be the `application/json` or `application/x-www-form-urlencoded` encoded body of the outgoing request
+(according to `tagret.content_type` attribute).
 
 Required attributes: `target`, `target.host`, `target.path`.
 
@@ -83,10 +86,15 @@ on merge request events within the same project:
 {"translations": [
   {
     "target": {
-        "method": "GET",
-        "protocol": "https",
-        "host": "git-example.com",
-        "path": "/api/v4/projects/:object_attributes.source_project_id/ref/:object_attributes.source_branch/trigger/pipeline?token=3d4e9e3139c73a6be30bece40bd3e8"
+      "method": "POST",
+      "protocol": "https",
+      "host": "git-example.com",
+      "path": "/api/v4/projects/:object_attributes.source_project_id/trigger/pipeline",
+      "content_type": "xfrom"
+    },
+    "body": {
+      "token": "3d4e9e3139c73a6be30bece40bd3e8",
+      "ref": ":object_attributes.source_branch"
     },
     "condition": ":object_attributes.work_in_progress === false"
   }
