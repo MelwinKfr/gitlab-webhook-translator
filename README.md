@@ -49,6 +49,8 @@ located at `/translations.json`.
     - `path`: Request path. Defaults to `"/"`.
 - `body`: Will be the `application/json` encoded body of the outgoing request.
 
+Required attributes: `target`, `target.host`, `target.path`.
+
 ### Variables
 You can use variables to translate the incoming request into the appropriate outgoing format.
 To do so, just use add `":"` before a valid attribute contained 
@@ -63,7 +65,7 @@ use the keyword `":__original-data__"` (only available in `body` attribute).
 ## Run it
     $ docker run -d \
         --name gitlab-wht-companion \
-        -v /hots/conf.json:/translations.json \
+        -v /host/conf.json:/translations.json \
         melwinkfr/gitlab-webhook-translator
 
     $ docker run \
@@ -90,3 +92,6 @@ on merge request events within the same project:
   }
 ]}
 ```
+## Contribute
+No big convention at the moment, just run an instance of [jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy/)
+and run script `./start-dev.sh` to get started. Your instance will be reachable at [http://wht.127.0.0.1.xip.io](http://wht.127.0.0.1.xip.io).

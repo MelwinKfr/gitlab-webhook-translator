@@ -21,22 +21,23 @@ app.all(/^\/test\/.*/, function (req, res) {
 });
 
 app.post('/', function (req, res) {
-    // Parse request body
     log.info('Hook received from ('+ req.ip +')');
 
     // Fetch Gitlab token
-    var token = req.get('X-Gitlab-Token');
+    var token = req.get('x-gitlab-token');
 
     // Parse file
     Config.parse(function (config) {
 
         // Process translations
-        for (i = 0; i < config.translations.length; i++) {
+        var i = 0;
+        for (; i < config.translations.length; i++) {
             var translation = config.translations[i];
             Translation.process(translation, req.body, token, function (status, translation) {
                 var name = (typeof translation.name === 'undefined') ? 'no_name' : translation.name;
+                name = (typeof translation.token !== 'undefined' && name === 'no_name') ? translation.token : name;
                 var msg = 'Translation "'+ name +'"';
-                if (!status) {log.warn(msg +'did not processed correclty!')} else {log.info(msg +' correctly processed')}
+                if (!status) {log.warn(msg +' did not processed correclty!')} else {log.info(msg +' correctly processed')}
             });
         }
     });
@@ -48,7 +49,6 @@ app.listen(80, function () {
 });
 
 // Check conf
-//todo: try catch block with line/position error message
 Config.parse(function (config) {
     var msg = 'Your configuration contains '+ config.translations.length +' translations';
     if (config.translations.length === 0) {log.warn(msg)} else {log.info(msg)}

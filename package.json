@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "decomment": "^0.8.7",
     "express": "^4.15.2",
     "npmlog": "^4.0.2"
   },
