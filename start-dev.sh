@@ -3,7 +3,7 @@
 name="gitlab-webhook-translator"
 
 # Build containers
-docker build -f docker/Dockerfile -t wht .
+docker build -f Dockerfile -t wht .
 docker build -f docker/Dockerfile-dev -t wht-dev .
 
 # Stop and remove old instance
