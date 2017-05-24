@@ -90,7 +90,7 @@ on merge request events within the same project:
       "protocol": "https",
       "host": "git-example.com",
       "path": "/api/v4/projects/:object_attributes.source_project_id/trigger/pipeline",
-      "content_type": "xfrom"
+      "content_type": "xform"
     },
     "body": {
       "token": "3d4e9e3139c73a6be30bece40bd3e8",
