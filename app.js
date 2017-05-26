@@ -34,10 +34,8 @@ app.post('/', function (req, res) {
         for (; i < config.translations.length; i++) {
             var translation = config.translations[i];
             Translation.process(translation, req.body, token, function (status, translation) {
-                var name = (typeof translation.name === 'undefined') ? 'no_name' : translation.name;
-                name = (typeof translation.token !== 'undefined' && name === 'no_name') ? translation.token : name;
-                var msg = 'Translation "'+ name +'"';
-                if (!status) {log.warn(msg +' did not processed correclty!')} else {log.info(msg +' correctly processed')}
+                var msg = 'Translation "'+ Translation.getName(translation) +'"';
+                if (!status) {log.warn(msg +' did not processed correctly!')} else {log.info(msg +' correctly processed')}
             });
         }
     });
