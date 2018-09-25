@@ -2,8 +2,10 @@
 
 name="gitlab-webhook-translator"
 
+# Intsall dev dependencies
+docker run --rm -it -v $(pwd):/app -w /app node npm install
+
 # Build containers
-docker build -f Dockerfile -t wht .
 docker build -f docker/Dockerfile-dev -t wht-dev .
 
 # Stop and remove old instance
