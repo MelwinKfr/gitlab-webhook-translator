@@ -102,6 +102,11 @@ on merge request events within the same project:
   }
 ]}
 ```
+
+## Testing
+
+To see the data that gitlab actually sends you can point your integration webhook to `<wht-address>/test/`. This way no translations will be processed but you can see the request gitlab made in the log. This is helpful for writing your translations.
+
 ## Contribute
 No big convention at the moment, just run an instance of [jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy/)
 and run script `./start-dev.sh` to get started. Your instance will be reachable at [http://wht.127.0.0.1.xip.io](http://wht.127.0.0.1.xip.io).
