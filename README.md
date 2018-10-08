@@ -56,7 +56,7 @@ Required attributes: `target`, `target.host`, `target.path`.
 
 ### Variables
 You can use variables to translate the incoming request into the appropriate outgoing format.
-To do so, just use add `":"` before a valid attribute contained 
+To do so, just use add `":"` before a valid attribute contained
 by the `application/json` encoded body of the incoming request.
 
 Variables are not available in every fields, just inside: `condition`, `target.path`, `body.*`.
@@ -85,6 +85,7 @@ on merge request events within the same project:
 ```json
 {"translations": [
   {
+    "name": "MergeRequestTrigger",
     "target": {
       "method": "POST",
       "protocol": "https",
@@ -94,12 +95,18 @@ on merge request events within the same project:
     },
     "body": {
       "token": "3d4e9e3139c73a6be30bece40bd3e8",
-      "ref": ":object_attributes.source_branch"
+      "ref": ":object_attributes.source_branch",
+      "variables[MY_VARIABLE]": "myvalue"
     },
-    "condition": ":object_attributes.work_in_progress === false"
+    "condition": ":object_kind == 'merge_request' && :object_attributes.work_in_progress === false"
   }
 ]}
 ```
+
+## Testing
+
+To see the data that gitlab actually sends you can point your integration webhook to `<wht-address>/test/`. This way no translations will be processed but you can see the request gitlab made in the log. This is helpful for writing your translations.
+
 ## Contribute
 No big convention at the moment, just run an instance of [jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy/)
 and run script `./start-dev.sh` to get started. Your instance will be reachable at [http://wht.127.0.0.1.xip.io](http://wht.127.0.0.1.xip.io).
