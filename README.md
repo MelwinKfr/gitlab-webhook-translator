@@ -1,4 +1,6 @@
 # Minimal Gitlab companion
+
+[![Hypercommit](https://img.shields.io/badge/Hypercommit-DB2475)](https://hypercommit.com/gitlab-webhook-translator)
 Just a tiny web server based on [Express](http://expressjs.com)
 to translate Gitlab web hooks body to the wanted format.
 
